@@ -1,0 +1,68 @@
+vi:
+  erp:
+    diseases:
+      backend:
+        diseases: 
+          index:
+            diseases: "Danh sách bệnh"
+            create: "Thêm bài viết"
+            published: "Đã xuất bản"
+            unpublished: "Chưa xuất bản"
+            image: "Hình ảnh"
+            name: "Tên bài viết"
+            category: "Danh mục"
+            description: "Mô tả"
+          list:
+            name: "Tên bài viết"
+            category: "Danh mục"
+            description: "Mô tả"
+            status: "Trạng thái"
+            actions: "Tùy chọn"
+            publish_confirm: "Xuất bản sẽ cho phép hiển thị ra ngoài website"
+            unpublish_confirm: "Ngưng xuất bản sẽ ngưng hiển thị ra ngoài website"
+            delete: "Xóa danh mục"
+          new:
+            diseases: "Bài viết bệnh"
+            create: "Thêm bài viết"
+          edit:
+            diseases: "Bài viết bệnh"
+            create: "Thêm bài viết"
+          form:
+            name: "Tên bài viết"
+            placeholder_name: "Nhập tên bài viết"
+            category: "Danh mục bệnh"
+            choose_category: "Chọn danh mục bệnh"
+            meta_keywords: "Từ khóa SEO"
+            meta_description: "Mô tả SEO"
+            placeholder_meta_keywords: "Nhập từ khóa SEO"
+            placeholder_meta_description: "Nhập mô tả SEO"
+            description: "Mô tả chung"
+            definition: "Định nghĩa về bệnh"
+            reason: "Nguyên nhân gây bệnh"
+            symptoms: "Các triệu chứng của bệnh"
+            treatment: "Cách điều trị"
+        categories:
+          index:
+            categories: "Danh mục bệnh"
+            create: "Thêm danh mục"
+            name: "Tên danh mục"
+            parent_category: "Danh mục cha"
+          list:
+            name: "Tên danh mục"
+            publish_confirm: "Xuất bản sẽ cho phép hiển thị ra ngoài website"
+            unpublish_confirm: "Ngưng xuất bản sẽ ngưng hiển thị ra ngoài website"
+            delete: "Xóa danh mục"
+          new:
+            categories: "Danh mục bệnh"
+          edit:
+            categories: "Danh mục bệnh"
+            create: "Thêm danh mục"
+          form:
+            name: "Tên danh mục"
+            placeholder_name: "Nhập tên danh mục"
+            parent_category: "Tên danh mục cha"
+            placeholder_parent_category: "Chọn tên danh mục cha"
+            description: "Mô tả"
+            placeholder_description: "Nhập mô tả"
+
+            

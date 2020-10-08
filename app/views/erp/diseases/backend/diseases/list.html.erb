@@ -1,0 +1,147 @@
+<div class="">
+    <table class="table table-advance table-hover table-striped table-checkable order-column" id="">
+        <thead>
+            <tr>
+                <th width='1%'>
+                    <%= erp_datalist_check_all %>
+                </th>
+                <% if get_columns(params).include?("image") %>
+                    <th>
+                        <%= t('.image') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("name") %>
+                    <th class="sortable" sort-by='erp_diseases_diseases.name'>
+                        <%= t('.name') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("category") %>
+                    <th>
+                        <%= t('.category') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("meta_keyword") %>
+                    <th>
+                        <%= t('.meta_keyword') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("meta_description") %>
+                    <th>
+                        <%= t('.meta_description') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("status") %>
+                    <th>
+                        <%= t('status') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("creator") %>
+                    <th>
+                        <%= t('creator') %>
+                    </th>
+                <% end %>
+                <% if get_columns(params).include?("created_at") %>
+                    <th class="sortable" sort-by='erp_diseases_diseases.created_at'>
+                        <%= t('created_at') %>
+                    </th>
+                <% end %>
+                <th width="7%" class="sortable text-nowrap" sort-by='erp_diseases_diseases.custom_order'>
+                    <%= t('custom_order') %>
+                </th>
+                <th width="7%"><%= t('.actions') %></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @diseases.each do |disease| %>
+                <tr class="odd gradeX">
+                    <td>
+                        <%= erp_datalist_check_row(id: disease.id) %>
+                    </td>
+                    <% if get_columns(params).include?("image") %>
+                        <td><%= disease.image %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("name") %>
+                        <td><%= link_to disease.name, erp_diseases.edit_backend_disease_path(disease) %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("category") %>
+                        <td><%= disease.category_name %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("meta_keyword") %>
+                        <td><%= disease.meta_keyword %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("meta_description") %>
+                        <td><%= disease.meta_description %></td>
+                    <% end %>
+                    <% if get_columns(params).include?("status") %>
+                    <td>
+                        <% if disease.published == true %>
+                        <span class="label label-sm label-success"><%= t('published') %></span>
+                        <% else %>
+                        <span class="label label-sm label-danger"><%= t('un_published') %></span>
+                        <% end %>
+                    </td>
+                    <% end %>
+                    <% if get_columns(params).include?("creator") %>
+                        <td>
+                            <%= erp_component('avatar', {
+                                user: disease.creator
+                            }) %>
+                        </td>
+                    <% end %>
+                    <% if get_columns(params).include?("created_at") %>
+                        <td><%= disease.created_at.strftime("%d/%m/%Y") %></td>
+                    <% end %>
+                    <td class="text-center text-semibold">
+                        <%= erp_datalist_order_column({
+                            item: disease,
+                            move_up_url: erp_diseases.move_up_backend_diseases_path(id: disease),
+                            move_down_url: erp_diseases.move_down_backend_diseases_path(id: disease),
+                            sort_by: 'erp_diseases_diseases.custom_order'
+                        }) %>
+                    </td>
+                    <td>
+                        <%= erp_datalist_row_actions(
+                            [
+                                {
+                                    text: '<i class="fa fa-edit"></i> '+t('edit'),
+                                    href: erp_diseases.edit_backend_disease_path(disease)
+                                },
+                                {
+                                    text: '<i class="fa fa-ban"></i> '+t('publish'),
+                                    url: erp_diseases.publish_backend_diseases_path(id: disease),
+                                    data_method: 'PUT',
+                                    hide: disease.published,
+                                    class: 'ajax-link',
+                                    data_confirm: t('.publish_confirm')
+                                },
+                                {
+                                    text: '<i class="fa fa-check"></i> '+t('unpublish'),
+                                    url: erp_diseases.unpublish_backend_diseases_path(id: disease),
+                                    data_method: 'PUT',
+                                    hide: !disease.published,
+                                    class: 'ajax-link',
+                                    data_confirm: t('.unpublish_confirm')
+                                },
+                                {
+                                    divider: true
+                                },
+                                {
+                                    text: '<i class="fa fa-trash"></i> '+t('.delete'),
+                                    url: erp_diseases.backend_disease_path(disease),
+                                    data_method: 'DELETE',
+                                    class: 'ajax-link',
+                                    data_confirm: t('delete_confirm')
+                                }
+                            ]
+                        ) %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% if @diseases.empty? %>
+        <div class="datalist-empty-line"><%= t('.no_matching_records_found') %></div>
+    <% end %>
+</div>
+
+<%= erp_datalist_pagination(@diseases) %>

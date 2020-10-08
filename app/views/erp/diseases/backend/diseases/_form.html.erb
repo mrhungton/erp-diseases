@@ -1,0 +1,103 @@
+<%= form_for([erp_diseases, :backend, disease], html: {multipart: true}) do |f| %>
+    <div class="row">
+        <div class="col-md-2">
+            <%= erp_form_control('image', {
+                img_src: disease.image.system,
+                name: 'disease[image]',
+                width: 150,
+                height: 150
+            }) %>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-6">
+                    <%= erp_form_control("text", {
+                        name: 'disease[name]',
+                        value: disease.name,
+                        label: t('.name'),
+                        placeholder: t('.placeholder_disease_name')
+                    }) %>
+                </div>
+                <div class="col-md-6">
+                    <%= erp_form_control("dataselect", {
+                        name: 'disease[category_id]',
+                        value: disease.category_id,
+                        text: disease.category_name,
+                        placeholder: t('.choose_category'),
+                        label: t('.category'),
+                        url: erp_diseases.dataselect_backend_categories_path(format: 'json'),
+                        create: {
+                            url: erp_diseases.new_backend_category_path,
+                            title: t('.create_category'),
+                            container_selector: '.new_category',
+                            input_selector: 'input[name="category[name]"]'
+                        },
+                        edit: {
+                            url: erp_diseases.edit_backend_category_path(id: ':value'),
+                            title: t('.edit_category'),
+                            container_selector: '.edit_category',
+                        },
+                        required: true,
+                        errors: disease.errors.full_messages_for(:category_id)
+                    }) %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <%= erp_form_control("textarea", {
+                        name: 'disease[meta_keywords]',
+                        value: disease.meta_keywords,
+                        placeholder: t('.placeholder_meta_keywords'),
+                        label: t('.meta_keywords')
+                    }) %>
+                </div>
+                <div class="col-md-6">
+                    <%= erp_form_control("textarea", {
+                        name: 'disease[meta_description]',
+                        value: disease.meta_description,
+                        placeholder: t('.placeholder_meta_description'),
+                        label: t('.meta_description')
+                    }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%= erp_form_control("editor", {
+        name: 'disease[description]',
+        value: disease.description,
+        label: t('.description')
+    }) %>
+    
+    <%= erp_form_control("editor", {
+        name: 'disease[definition]',
+        value: disease.definition,
+        label: t('.definition')
+    }) %>
+    
+    <%= erp_form_control("editor", {
+        name: 'disease[reason]',
+        value: disease.reason,
+        label: t('.reason')
+    }) %>
+    
+    <%= erp_form_control("editor", {
+        name: 'disease[symptoms]',
+        value: disease.symptoms,
+        label: t('.symptoms')
+    }) %>
+    
+    <%= erp_form_control("editor", {
+        name: 'disease[treatment]',
+        value: disease.treatment,
+        label: t('.treatment')
+    }) %>
+
+    <%= erp_component('button/save', {
+        text: t('submit')
+    }) %>
+    <%= erp_component('button/cancel', {
+        text: t('cancel'),
+        href: erp_diseases.backend_diseases_path
+    }) %>    
+<% end %>
