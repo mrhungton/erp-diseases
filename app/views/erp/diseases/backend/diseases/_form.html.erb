@@ -93,6 +93,44 @@
         label: t('.treatment')
     }) %>
 
+    <hr>
+    <h3>DANH SÁCH SẢN PHẨM (THUỐC) LIÊN QUAN</h3>
+    <div class="addableform-table">
+        <%= erp_form_control("addableform", {
+            type: 'table',
+            add_button: 'Thêm vào danh sách',
+            partial: 'erp/diseases/backend/diseases_products/diseases_product_line_form',
+            partial_url: erp_diseases.diseases_product_line_form_backend_diseases_products_path,
+            items: @disease.diseases_products,
+            item: :diseases_product,
+            add_control_selector: "input[name='product_id']",
+            add_control: erp_form_control("dataselect", {
+                name: 'product_id',
+                value: 1,
+                placeholder: 'Chọn sản phẩm liên quan',
+                label: 'Sản phẩm liên quan',
+                help: 'Lựa chọn sản phẩm và thêm vào danh sách',
+                url: erp_products.dataselect_backend_products_path(format: 'json'),
+            }),
+            thead: "<th>#{'Tên sản phẩm'}</th>
+                    <th>#{'Giá bán áp dụng'}</th>
+                    <th>#{'Tùy chọn'}</th>"
+        }) %>
+        
+        <!-- <hr />
+        <table class="table">
+            <tr>
+                <td width="90%" class="text-right text-semibold">Tổng số lượng:</td>
+                <td class="text-right">
+                    <h4 class="no-margin">
+                        <span class="part_quantity text-bold text-primary"></span>
+                    </h4>
+                </td>
+            </tr>
+        </table> -->
+    </div>
+
+    <hr>
     <%= erp_component('button/save', {
         text: t('submit')
     }) %>

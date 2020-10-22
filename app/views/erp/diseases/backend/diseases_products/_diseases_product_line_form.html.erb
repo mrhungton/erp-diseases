@@ -1,0 +1,14 @@
+<input type="hidden" name="disease[diseases_products_attributes][<%= uid %>][id]" value="<%= diseases_product.id %>">
+<input type="hidden" name="disease[diseases_products_attributes][<%= uid %>][product_id]" value="<%= diseases_product.product_id %>">
+<input type="hidden" name="disease[diseases_products_attributes][<%= uid %>][_destroy]" value="">
+
+<!-- <td><%= diseases_product.product_code %></td> -->
+<td><%= diseases_product.product_name %></td>
+<td>
+    <%= diseases_product.product_price %>
+</td>
+<td>
+    <%= erp_form_control("addableform_remove_button", {
+        is_nested_form: true
+    }) %>
+</td>

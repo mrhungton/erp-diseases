@@ -27,6 +27,11 @@ Erp::Diseases::Engine.routes.draw do
           put 'move_down'
         end
       end
+      resources :diseases_products do
+				collection do
+          get 'diseases_product_line_form'
+				end
+			end
     end
   end
 end

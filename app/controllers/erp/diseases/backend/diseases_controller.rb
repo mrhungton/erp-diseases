@@ -204,9 +204,12 @@ module Erp
 
           # Only allow a trusted parameter "white list" through.
           def disease_params
-            params.fetch(:disease, {}).permit(:image, :name, :content, :meta_keywords, :meta_description, :tags, :category_id,
-                                              :show_company_structure, :show_brand_identity, :show_our_team, :parent_id,
-                                              :short_content, :style_icon, :link_video, :album_id, :corporator_id)
+            params.fetch(:disease, {}).permit(:image, :name, :content, :meta_keywords, :meta_description, 
+              :tags, :category_id,
+              :show_company_structure, :show_brand_identity, :show_our_team, :parent_id,
+              :short_content, :style_icon, :link_video, :album_id, :corporator_id,
+              :diseases_products_attributes => [ :id, :disease_id, :product_id, :_destroy ],
+            )
           end
       end
     end

@@ -6,6 +6,11 @@ module Erp::Diseases
     belongs_to :category
     mount_uploader :image, Erp::Diseases::DiseaseUploader
 
+    has_and_belongs_to_many :products, class_name: "Erp::Products::Product", :join_table => 'erp_diseases_diseases_products'
+    
+    has_many :diseases_products, class_name: "Erp::Diseases::DiseasesProduct", dependent: :destroy
+    accepts_nested_attributes_for :diseases_products, :reject_if => lambda { |a| a[:product_id].blank? }, :allow_destroy => true
+
     # get articles active
     def self.get_active
 			self.where(published: true)
@@ -122,6 +127,10 @@ module Erp::Diseases
 
     def post_by
 			creator.present? ? creator.name : ''
-		end
+    end
+    
+    def get_related_products()
+      self.products
+    end
   end
 end
