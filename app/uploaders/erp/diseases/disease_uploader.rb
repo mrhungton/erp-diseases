@@ -58,7 +58,7 @@ module Erp
       end
       
       version :medium do
-        process resize_to_fill: [270, 175]
+        process resize_to_fill: [350, 230]
       end
     end
   end
